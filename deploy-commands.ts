@@ -8,12 +8,13 @@ const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('
 
 for (const file of commandFiles) {
    const command = require(`./commands/${file}`);
-   command.push(command.data.toJSON());
+   commands.push(command.data.toJSON()); // push the command data to the commands array
+   console.log(command.data.toJSON());
 }
 
 const rest = new REST({ version: '10' }).setToken(`${Token}`);
 
-(async () => {
+(async() => {
    try {
       console.log('Started refreshing application (/) commands.');
 
@@ -26,4 +27,4 @@ const rest = new REST({ version: '10' }).setToken(`${Token}`);
    } catch (error) {
       console.error(error);
    }
-})
+})();
